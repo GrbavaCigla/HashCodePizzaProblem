@@ -1,3 +1,29 @@
+def getMinIngredients(rows):
+    numTomatos = 0
+    numShrooms = 0
+    for i in rows:
+        for j in i:
+            if j == "T":
+                numTomatos += 1
+            elif j == "M":
+                numShrooms += 1
+            else:
+                raise("Invalid Input: Slice Containing Invalid Ingredient(s)")
+    if min(numShrooms, numTomatos) == numShrooms:
+        return "mushroom"
+    else:
+        return "tomato"
+
+
+def makeSlices(rows):
+    minIngredient = getMinIngredients(rows)[0].upper()
+    slices = []
+    for id1, i in enumerate(rows):
+        for id2, j in enumerate(i):
+            if j == minIngredient:
+                slices.append(" ".join(list(map(str, [id1, id2, id1, id2]))))
+    return slices
+
 
 def getSlice(rows, slice):
     raw_slice = list(map(int, slice.split()))
@@ -38,7 +64,9 @@ def isValidSlice(rows, slice, minPerSlice, maxPerCels):
 # rows = [input() for i in range(numRows)]
 numRows, numCols, minPerSlice, maxPerCels = 3, 5, 1, 6
 rows = ["TTTTT", "TMMMT", "TTTTT"]
-_slices = ["0 0 2 1", "0 2 2 2", "0 3 2 4"]
+result_slices = ["0 0 2 1", "0 2 2 2", "0 3 2 4"]
+slices = makeSlices(rows)
 
 
-print(isValidSlice(rows, _slices[0], minPerSlice, maxPerCels))
+if result_slices == slices:
+    print("Did it!")
