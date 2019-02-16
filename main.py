@@ -1,3 +1,6 @@
+from itertools import combinations
+
+
 def getMinIngredients(rows):
     numTomatos = 0
     numShrooms = 0
@@ -60,12 +63,37 @@ def isValidSlice(rows, slice, minPerSlice, maxPerCels):
     return True
 
 
+def getDistance(slice1, slice2):
+    raw_slice1 = list(map(int, slice1.split()))
+    raw_slice2 = list(map(int, slice2.split()))
+    row1 = raw_slice1[0]
+    col1 = raw_slice1[1]
+    row2 = raw_slice2[2]
+    col2 = raw_slice2[3]
+    return (abs(abs(row1-row2)-1), abs(abs(col1-col2)-1))
+
+
+def expandSlice(slice, right=1, left=1, top=1, bottom=1):
+    raw_slice = list(map(int, slice.split()))
+    row1 = raw_slice[0]
+    col1 = raw_slice[1]
+    row2 = raw_slice[2]
+    col2 = raw_slice[3]
+    return " ".join(list(map(str, [abs(row1-top), abs(col1-right), row2+bottom, col2+left])))
+
+
 # numRows, numCols, minPerSlice, maxPerCels = list(map(int, input().split()))
 # rows = [input() for i in range(numRows)]
 numRows, numCols, minPerSlice, maxPerCels = 3, 5, 1, 6
 rows = ["TTTTT", "TMMMT", "TTTTT"]
 result_slices = ["0 0 2 1", "0 2 2 2", "0 3 2 4"]
 slices = makeSlices(rows)
+slice_combinations = list(combinations(slices, 2))
+# slice_distances = list()
+# for i, j in slice_combinations:
+#     slice1 = map(int, i.split()[:2])
+#     slice2 = map(int, j.split()[:2])
+#     slice_distances
 
 
 if result_slices == slices:
