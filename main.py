@@ -88,12 +88,6 @@ numRows, numCols, minPerSlice, maxPerCels = 3, 5, 1, 6
 rows = ["TTTTT", "TMMMT", "TTTTT"]
 result_slices = ["0 0 2 1", "0 2 2 2", "0 3 2 4"]
 slices = makeSlices(rows)
-slice_combinations = list(combinations(slices, 2))
-# slice_distances = list()
-# for i, j in slice_combinations:
-#     slice1 = map(int, i.split()[:2])
-#     slice2 = map(int, j.split()[:2])
-#     slice_distances
 
 
 if result_slices == slices:
